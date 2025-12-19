@@ -1,62 +1,132 @@
-# Astro Starter Kit: Blog
+# lohanlon.dev
 
-```sh
-npm create astro@latest -- --template blog
+This is my personal site / engineering notebook.
+
+It exists primarily as a reference for myself: a place to write things down so I don’t have to
+re-learn them later. If anything here is useful to someone else, that’s a bonus rather
+than the goal.
+
+The site is intentionally simple, static, and low-maintenance.
+
+---
+
+## Tech stack
+
+- **Astro** – static site generation
+- **Markdown / MDX** – content
+- **Cloudflare Pages** – hosting and deployment
+- **GitHub** – source control and CI
+
+---
+
+## Hosting & deployment
+
+The site is hosted on **Cloudflare Pages**.
+
+- This GitHub repository is connected to Cloudflare Pages
+- Every push to the `main` branch automatically triggers a build and deployment
+
+### Deploying the site
+
+There is no manual deployment step.
+
+```
+git push origin main
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-Features:
+## Running locally
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+Install dependencies once:
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-├── public/
-├── src/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
+```
+npm install
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Start the local development server:
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```
+npm run dev
+```
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+The site will be available at:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```
+http://localhost:4321
+```
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## Project structure (high level)
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```
+public/
+  Static files served as-is
 
-## 👀 Want to learn more?
+src/
+  assets/
+    Images imported into components (hero images, etc.)
 
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+  content/
+    Markdown / MDX content collections
+    blog/
+      Blog posts and notes
 
-## Credit
+  components/
+    Reusable components
 
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+  layouts/
+    Page and post layouts
+
+  pages/
+    Top-level routes (about, index, etc.)
+```
+
+---
+
+## Asset usage
+
+Astro distinguishes between **build-time assets** and **runtime assets**.
+
+- **Imported assets** → `src/assets/`
+  - Example: blog post hero images imported into layouts
+- **Assets referenced by URL** (`<img src="...">`) → `public/`
+  - Example: icons, favicons, static images
+
+---
+
+## Writing new blog posts / notes
+
+Posts live under:
+
+```
+src/content/blog/
+```
+
+To add a new post:
+
+1. Create a new `.md` or `.mdx` file in `src/content/blog/`
+2. Add frontmatter (title, description, publish date, etc.)
+3. Write content in Markdown or MDX
+4. Commit and push to `main`
+
+---
+
+## Building the site manually (optional)
+
+To generate a production build locally:
+
+```
+npm run build
+```
+
+The output will be created in:
+
+```
+dist/
+```
+
+This is usually only needed for debugging build issues.
+
+---
